@@ -6,6 +6,8 @@ environments:
     vpc_cidr: 10.10.0.0/16
     stack_name: development-devops
   test:
+    cluster_size: "2"
+    cluster_instance_type: t2.micro
     vpc_cidr: 10.20.0.0/16
     stack_name: test-devops
   acceptance:

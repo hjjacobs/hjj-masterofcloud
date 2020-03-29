@@ -18,6 +18,18 @@ module InfraStack
         r.property(:tags) { default_tags }
       end
 
+      resource :acm_stack,
+               type: "AWS::CloudFormation::Stack" do |r|
+        r.property(:template_url) { "acmstack" }
+        r.property(:tags) { default_tags }
+      end
+
+      resource :ecs_stack,
+               type: "AWS::CloudFormation::Stack" do |r|
+        r.property(:template_url) { "ecsstack" }
+        r.property(:tags) { default_tags }
+      end
+
       create_applications
     end
   end
