@@ -12,6 +12,12 @@ module InfraStack
         r.property(:tags) { default_tags }
       end
 
+      resource :s3bucket_stack,
+               type: "AWS::CloudFormation::Stack" do |r|
+        r.property(:template_url) { "s3bucketstack" }
+        r.property(:tags) { default_tags }
+      end
+
       create_applications
     end
   end
