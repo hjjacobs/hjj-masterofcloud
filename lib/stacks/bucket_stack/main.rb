@@ -1,11 +1,11 @@
-module S3BucketStack
+module BucketStack
   extend ActiveSupport::Concern
   include Rubycfn
   included do
     include Concerns::GlobalVariables
     include Concerns::SharedMethods
-    include S3BucketStack::S3Bucket
+    include BucketStack::Bucket
 
-    description generate_stack_description("S3BucketStack")
+    description generate_stack_description("BucketStack")
   end
 end
