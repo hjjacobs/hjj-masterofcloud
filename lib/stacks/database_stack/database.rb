@@ -9,6 +9,7 @@ module DatabaseStack
         r.property(:master_username) {"movies"}
         r.property(:master_user_password) { ENV["DATABASE_PASSWORD"] }
         r.property(:publicly_accessible) {true}
+        r.property(:allocated_storage) {"5"}
         r.property(:tags) { default_tags }
       end
     end
