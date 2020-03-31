@@ -19,7 +19,7 @@ module InfraStack
       end
 
       resource :database_stack,
-      type: "AWS::CloudFormation::Stack" do |r|
+               type: "AWS::CloudFormation::Stack" do |r|
         r.property(:template_url) { "databasestack" }
         r.property(:tags) { default_tags }
        end
