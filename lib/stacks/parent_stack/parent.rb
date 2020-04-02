@@ -18,7 +18,27 @@ module InfraStack
         r.property(:tags) { default_tags }
       end
 
+      resource :one_stack,
+               type: "AWS::CloudFormation::Stack" do |r|
+        r.property(:template_url) { "onestack" }
+        r.property(:tags) { default_tags }
+      end
+
+      resource :two_stack,
+               type: "AWS::CloudFormation::Stack" do |r|
+        r.property(:template_url) { "twostack" }
+        r.property(:tags) { default_tags }
+        r.property(:parameters) do
+          {
+            "BucketName": "OneStack".ref("Outputs.MyS3BucketName"),
+            "WebsiteUrl": "OneStack".ref("Outputs.MyS3BucketWebsiteUrl"),
+            "BucketDomainName": "OneStack".ref("Outputs.MyS3BucketDomainName"),
+          }
+        end
+      end
+
       resource :database_stack,
+               amount: 0,
                type: "AWS::CloudFormation::Stack" do |r|
         r.property(:template_url) { "databasestack" }
         r.property(:tags) { default_tags }
