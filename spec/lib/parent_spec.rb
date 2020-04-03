@@ -29,6 +29,15 @@ describe ParentSpec do
       let(:resources) { template["Resources"] }
       subject { resources }
 
+      it { should have_key "VpcStack" }
+
+      if ENV["ASSIGNMENT_FOUR"] == "true"
+        it { should_not have_key "AcmStack" }
+        it { should_not have_key "EcsStack" }
+        it { should_not have_key "OneStack" }
+        it { should_not have_key "TwoStack" }
+        it { should have_key "LambdaStack" }
+      end
     end
   end
 end
