@@ -9,25 +9,6 @@ module LambdaStack
 
       # ASSIGNMENT: Implement this as a Serverless Resource
 
-
-      resource :slackposter,
-               type: "AWS::Serverless::EventSource" do |r|
-        r.property(:http_api_event) do {
-          "Type": "HttpApi",
-          "Properties": {
-            "Path": "/",
-            "Method": "POST"
-          }
-        }
-        end
-      end
-
-      # resource :slackposter,
-      #          type: "AWS::Serverless::HttpApi" do |r|
-      #   r.property(:path) {"/"}
-      #   r.property(:method) {"POST"}
-      # end
-
       resource :my_serverless_function,
                type: "AWS::Serverless::Function" do |r|
         r.property(:description) {"Lambda function - master of cloud"}
@@ -38,21 +19,17 @@ module LambdaStack
               }
             }
         end
-        r.property(:events) {:slackposter.ref}
-        # r.property(:events) do [
-        #     :slackposter.ref
-        #   ]
-        # end
-        # r.property(:events) do [
-        #       "HttpApiEvent": {
-        #         "Type": "HttpApi",
-        #         "Properties": {
-        #           "Path": "/",
-        #           "Method": "POST"
-        #         }
-        #       }
-        #    ]
-        # end
+        r.property(:events) do
+          {
+            "slackposter": {
+                "Type": "HttpApi",
+                "Properties": {
+                  "Path": "/",
+                  "Method": "post"
+                }
+            }
+          }
+        end
         r.property(:handler) {"index.lambda_handler"}
         r.property(:inline_code) {"#{lambda_function_code}"}
         r.property(:timeout) {3}
