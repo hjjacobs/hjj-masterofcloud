@@ -34,7 +34,12 @@ module LambdaStack
         r.property(:inline_code) {"#{lambda_function_code}"}
         r.property(:timeout) {3}
         r.property(:runtime) {"python3.7"}
-        r.property(:tags) { default_tags }
+        r.property(:tags) do {
+          "Team": "Infra",
+          "Environment": "test",
+          "StackName": "test-devops"
+          }
+        end
       end
     end
   end
