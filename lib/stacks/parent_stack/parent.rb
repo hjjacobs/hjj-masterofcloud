@@ -21,7 +21,6 @@ module InfraStack
       resource :lambda_stack,
                type: "AWS::CloudFormation::Stack" do |r|
         r.property(:template_url) { "lambdastack" }
-        r.property(:tags) { default_tags }
       end
 
 
